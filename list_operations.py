@@ -218,26 +218,25 @@ def custom_insert(input_list, index, value):
     like input_list.insert(index, value), should insert (not replace) the value
     at the specified index of the input list and return nothing
     """
+    input_list[:] = input_list[:index] + [value] + input_list[index:]
     
-    input_list[: index] + [value] + input_list[index: ]
-
 
 def custom_remove(input_list, value):
     """
     like input_list.remove(value), should remove the first item of the
     value specified and return nothing
     """
+    input_list[:] = input_list[:input_list.index(value)] + input_list[input_list.index(value)+1:]
 
-    pass
-
-
+    
 def custom_pop(input_list):
     """
     like input_list.pop(), should remove the last item in the list and
     return it
     """
-
-    return None
+    last_item = input_list[-1]
+    input_list[:] = input_list[:-1]
+    return last_item
 
 
 def custom_index(input_list, value):
@@ -245,8 +244,14 @@ def custom_index(input_list, value):
     like input_list.index(value), should return the index of the first item
     which matches the specified value
     """
+    index_counter = 0
+    
+    for items in input_list:
+        if items == value:
+            return index_counter
+        else:
+            index_counter += 1
 
-    return 0
 
 
 def custom_count(input_list, value):
@@ -254,9 +259,13 @@ def custom_count(input_list, value):
     like input_list.count(value), should return the number of times the specified
     value appears in the list.
     """
-
-    return 0
-
+    value_counter = 0
+    
+    for items in input_list:
+        if items == value:
+            value_counter += 1
+        
+    return value_counter
 
 def custom_reverse(input_list):
     """
@@ -264,7 +273,7 @@ def custom_reverse(input_list):
     and return nothing (we call this reversing "in place")
     """
 
-    pass
+    input_list[:] = input_list[::-1]
 
 
 def custom_contains(input_list, value):
@@ -273,19 +282,32 @@ def custom_contains(input_list, value):
     specified value and False if it does not. Remember, do not use the `in`
     statement -- find another way to solve it!
     """
-
-    return None
-
+    try:
+        input_list.index(value) 
+        return True
+    except:
+        return False
 
 def custom_equality(some_list, another_list):
     """
     like (some_list == another_list), should return True if both lists contain
     the same values in the same indexes
     """
+    
 
-    return None
+    status = True
 
+    if len(some_list) != len(another_list):
+        status = False
 
+    else:
+        for num in range(len(some_list)):
+
+            if some_list[num] != another_list[num]:
+                status = False
+                break
+
+    return status
 ##############################################################################
 # END OF EXTRA CREDIT
 #

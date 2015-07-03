@@ -152,6 +152,8 @@ class TestListOperations(unittest.TestCase):
         custom_insert(self.notes, len(self.notes), 'Re')
         custom_insert(self.multiples, 0, -3)
 
+        print self.months
+
         self.assertEqual(self.months, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                                        'Jul', 'Aug', 'Hex', 'Sep', 'Oct', 'Nov',
                                        'Dec'])
